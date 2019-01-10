@@ -60,9 +60,15 @@ namespace MOQUnitTestProject
             Assert.IsNotNull(dados);
             Assert.AreEqual(true, dados.Count > 0);
 
-            dados = service.ConsultarProdutos();
+            //dados = service.ConsultarProdutos();
+            //Assert.IsNull(dados);
+            //mock.Verify();
 
-            Assert.IsNull(dados);
+            // Called at least once
+            mock.Verify(serv => serv.ConsultarProdutos("all"), Times.AtLeastOnce());
+
+            // Called at least once
+            mock.Verify(serv => serv.ConsultarProdutos(), Times.Never(),"Metodo não deveria ser chamado");
 
         }
     }
